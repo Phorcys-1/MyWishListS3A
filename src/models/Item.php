@@ -1,7 +1,9 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+//require_once __DIR__ . '/../vendor/autoload.php';
+namespace wishlist\models;
 
 use Illuminate\Database\Eloquent\Model;
+
 
 
 

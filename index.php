@@ -9,10 +9,8 @@
 //phpinfo();
 
 require_once __DIR__ . '/vendor/autoload.php';
-
-
-
 use  Illuminate\Database\Capsule\Manager as DB;
+use wishlist\models\Item;
 
 echo 'init'.'<br>';
 
@@ -40,7 +38,7 @@ print ("connécté a la base".'<br>');
 //$q1 = Item::select( 'id', 'nom')  ->where( 'nom', 'like', 'C%') ;
 //echo $q1->get().'<br>';
 
-$items = wishlist\model\item::all();
+$items = wishlist\models\item::all();
 foreach ($items as $item){
     print $item->id.' '.$item->nom.'<br>';
 }
