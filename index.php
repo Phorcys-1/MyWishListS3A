@@ -12,6 +12,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 use  Illuminate\Database\Capsule\Manager as DB;
 use wishlist\models\Item;
 
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+
 echo 'init'.'<br>';
 
 $db = new DB();
@@ -19,10 +23,10 @@ print ("eloquent installé".'<br>');
 
 $db->addConnection([
     'driver' => 'mysql',
-    'host' => 'localhost',
+    'host' => 'root',
     'database' => 'wish',
     'username' => 'wish',
-    'passwaord' => '',
+    'passwaord' => 'root',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci'
 ]);
@@ -42,5 +46,31 @@ $items = wishlist\models\item::all();
 foreach ($items as $item){
     print $item->id.' '.$item->nom.'<br>';
 }
+
+$app = new \Slim\App();
+
+$app->get( '/wishlist/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
+    $name = $args['name'];
+    $rs->getBody()->write("<h1>Liste des $name </h1>");
+    return $rs;
+}
+);
+
+$app->get( '/items_wishlist/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
+    $name = $args['name'];
+    $rs->getBody()->write("<h1>Liste des items d'une wishlist $name </h1>");
+    return $rs;
+}
+);
+
+$app->get( '/items_id/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
+    $name = $args['name'];
+    $rs->getBody()->write("<h1>Affichage d'un $name </h1>");
+    return $rs;
+}
+);
+
+
+$app->run();
 
 
