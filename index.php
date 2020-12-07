@@ -56,7 +56,7 @@ $app->get( '/wishlist/{name}[/]', function(Request $rq, Response $rs, array $arg
 }
 );
 
-$app->get( '/items_wishlist/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
+$app->get( '/wishlist/list_items', function(Request $rq, Response $rs, array $args ): Response {
     $name = $args['name'];
     $rs->getBody()->write("<h1>Liste des items d'une wishlist $name </h1>");
     return $rs;
