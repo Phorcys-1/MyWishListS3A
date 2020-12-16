@@ -15,6 +15,8 @@ use wishlist\models\Item;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+define('DEMANDEUR',1);
+define('OFFREUR',0);
 
 echo 'init'.'<br>';
 
@@ -28,7 +30,8 @@ $db->addConnection([
     'username' => 'wish',
     'passwaord' => 'root',
     'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci'
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => ''
 ]);
 
 $db->setAsGlobal();
@@ -70,6 +73,23 @@ $app->get( '/items_id/{name}[/]', function(Request $rq, Response $rs, array $arg
 }
 );
 
+$app->get( '/enregistrement', function() {
+    $ctrl = new wishlist\controleur\UtilisateurControleur();
+    $ctrl->registerForm();
+    })->name('inscription_uti');
+$app->post( '/enregistrement', function() use($app){
+    $ctrl = new wishlist\controleur\UtilisateurControleur();
+    $ctrl->createUser //TODO
+});
+
+$app->get( '/demandeur/:name/:id', function(string $name, int $id) {
+    $dmd = new wishlist\controleur\OffreurControleur();
+    $dmd->afficherItem($name,$id);
+})->name('consulter_item');
+$app->post( '/demandeur/:name/:id', function(string $name, int $id) {
+    $dmd = new wishlist\controleur\OffreurControleur();
+    $dmd->aquerirItem($name,$id);
+});
 
 $app->run();
 
