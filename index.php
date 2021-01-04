@@ -79,7 +79,7 @@ $app->get( '/enregistrement', function() {
     })->name('inscription_uti');
 $app->post( '/enregistrement', function() use($app){
     $ctrl = new wishlist\controleur\UtilisateurControleur();
-    $ctrl->createUser //TODO
+    //$ctrl->createUser //TODO
 });
 
 $app->get( '/demandeur/:name/:id', function(string $name, int $id) {

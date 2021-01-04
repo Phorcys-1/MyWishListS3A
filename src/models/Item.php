@@ -33,6 +33,10 @@ class Item extends Model{
         //return select * where id = $pId
     }
 
+    public function liste(){
+        return $this->belongsTo('wishlist\src\modele\Liste', 'liste_id');
+    }
+
 
 }
 
