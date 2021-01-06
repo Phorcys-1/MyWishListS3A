@@ -12,7 +12,7 @@ class Item extends Model{
     protected $primaryKey; //= '' ?
     protected $nom;
 
-
+    /*
     public function __construct($pId, $pNom) {
         /*
         if (!(var_dump($pId) == int && var_dump($pNom) == String)) {
@@ -26,8 +26,8 @@ class Item extends Model{
             $this->nom = $pNom;
             create sql
         }
-         */
-    }
+
+    }*/
 
     public static function get($pId){
         //return select * where id = $pId
