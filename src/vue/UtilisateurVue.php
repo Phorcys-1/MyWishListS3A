@@ -6,11 +6,14 @@ namespace wishlist\vue;
 
 class UtilisateurVue {
 
-    function registerForm(){
+    public function registerForm(){
         echo <<<eze
-<h3>Enregistrez-vous</h3>
-<form action ="" method = "post"
-eze;
-
+        <h3>Enregistrez-vous</h3>
+        <form action ="" method = "post">
+        Nom : <input type="text" name="nom">
+        <p>Password : <input type="password" name="password"></p>
+        <input type="submit" name="i" value="S'inscrire">
+        </form>
+        eze;
     }
 }
