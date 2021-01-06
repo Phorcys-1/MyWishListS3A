@@ -52,44 +52,29 @@ foreach ($items as $item){
 
 $app = new \Slim\App();
 
-$app->get( '/wishlist/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
-    $name = $args['name'];
-    $rs->getBody()->write("<h1>Liste des $name </h1>");
-    return $rs;
-}
-);
+$app->get('/', PageControleur::class.':index')->setName('accueil');
 
-$app->get( '/wishlist/list_items', function(Request $rq, Response $rs, array $args ): Response {
-    $name = $args['name'];
-    $rs->getBody()->write("<h1>Liste des items d'une wishlist $name </h1>");
-    return $rs;
-}
-);
+use wishlist\controleur\ListeControleur as Lc;
+//Routes listes
+$app->get('/liste/c/create', Lc::class.':createListe')->setName('Creation_liste');
+$app->post('/liste/c/create', Lc::class.':insertListe')->setName('Insertion_liste');
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}', Lc::class.':getListe')->setName('Affichage_liste');
+//Suppression liste ? TODO
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}', Lc::class.':editListe')->setName('Edition_liste');
+$app->post('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}', Lc::class.':updateListe')->setName('Modification_liste');
+$app->post('/liste/{tokenPublic:[a-zA-Z0-9]+}/addMessage', Lc::class.':addMessage')->setName('Ajout_description');
 
-$app->get( '/items_id/{name}[/]', function(Request $rq, Response $rs, array $args ): Response {
-    $name = $args['name'];
-    $rs->getBody()->write("<h1>Affichage d'un $name </h1>");
-    return $rs;
-}
-);
 
-$app->get( '/enregistrement', function() {
-    $ctrl = new wishlist\controleur\UtilisateurControleur();
-    $ctrl->registerForm();
-    })->name('inscription_uti');
-$app->post( '/enregistrement', function() use($app){
-    $ctrl = new wishlist\controleur\UtilisateurControleur();
-    //$ctrl->createUser //TODO
-});
+use wishlist\controleur\ItemControleur as Ic;
+//Routes Articles
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}/item/add', Ic::class.':createItem')->setName('Creation_article');
+$app->post('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}/item/add', Ic::class.':insertItem')->setName('Insertion_article');
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/item/{idItem:[0-9]+}', Ic::class.':getItem')->setName('Affichage_article');
+$app->post('/liste/{tokenPublic:[a-zA-Z0-9]+}/item/{idItem:[0-9]+}/reserve', Ic::class.':reserverItem')->setName('Reservation_article');
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}/item/{idItem:[0-9]+}/delete', Ic::class.':deleteItem')->setName('Suppression_Article');
+$app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}/item/{idItem:[0-9]+}/edit', Ic::class.':editItem')->setName('Edition_article');
+$app->post('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}/item/{idItem:[0-9]+}/edit', Ic::class.':updateItem')->setName('Modification_article');
 
-$app->get( '/demandeur/:name/:id', function(string $name, int $id) {
-    $dmd = new wishlist\controleur\OffreurControleur();
-    $dmd->afficherItem($name,$id);
-})->name('consulter_item');
-$app->post( '/demandeur/:name/:id', function(string $name, int $id) {
-    $dmd = new wishlist\controleur\OffreurControleur();
-    $dmd->aquerirItem($name,$id);
-});
 
 $app->run();
 
