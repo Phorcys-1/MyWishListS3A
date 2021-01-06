@@ -8,6 +8,8 @@ use wishlist\vue\UtilisateurVue as vUti;
 class Utilisateur
 {
 
+
+
     public function registerForm() {
 
         $v = new vUti();
