@@ -11,13 +11,16 @@
 require_once __DIR__ . '/vendor/autoload.php';
 use  Illuminate\Database\Capsule\Manager as DB;
 use wishlist\models\Item;
+use wishlist\database\Eloquent as Eloquent;
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+
 define('DEMANDEUR',1);
 define('OFFREUR',0);
 
+/*
 echo 'init'.'<br>';
 
 $db = new DB();
@@ -37,6 +40,8 @@ $db->addConnection([
 $db->setAsGlobal();
 $db->bootEloquent();
 print ("connécté a la base".'<br>');
+*/
+Eloquent::start(__DIR__.'/src/conf/conf.ini');
 
 //$q1 = Ville::select( 'id', 'nom', 'population')  ->where( 'nom', 'like', 'vand%') ;
 //$q1 = $q1->orderBy('population');
