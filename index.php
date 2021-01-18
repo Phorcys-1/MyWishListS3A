@@ -41,7 +41,8 @@ $db->setAsGlobal();
 $db->bootEloquent();
 print ("connécté a la base".'<br>');
 */
-Eloquent::start(__DIR__.'/src/conf/conf.ini');
+
+Eloquent::start(__DIR__.'/src/conf/conf.ini.dist');
 
 //$q1 = Ville::select( 'id', 'nom', 'population')  ->where( 'nom', 'like', 'vand%') ;
 //$q1 = $q1->orderBy('population');
