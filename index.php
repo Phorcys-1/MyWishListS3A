@@ -58,12 +58,23 @@ foreach ($items as $item){
 
 $app = new \Slim\App();
 
+/*test slim hello world */
+$app->get('/hello/{name}',
+    function (Request $req, Response $resp, $args) {
+        $name = $args['name'];
+        $resp->getBody()->write("Hello, $name");
+        return $resp;
+    }
+);
+
+
+
 $app->get('/', PageControleur::class.':index')->setName('accueil');
 
 use wishlist\controleur\ListeControleur as Lc;
 //Routes listes
 $app->get('/liste/c/create', Lc::class.':createListe')->setName('Creation_liste');
-$app->post('/liste/c/create', Lc::class.':insertListe')->setName('Insertion_liste');
+$app->post('/liste/c/insert', Lc::class.':insertListe')->setName('Insertion_liste');
 $app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}', Lc::class.':getListe')->setName('Affichage_liste');
 //Suppression liste ? TODO
 $app->get('/liste/{tokenPublic:[a-zA-Z0-9]+}/edit/{tokenPrivate:[a-zA-Z0-9]+}', Lc::class.':editListe')->setName('Edition_liste');
