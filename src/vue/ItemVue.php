@@ -1,16 +1,35 @@
 <?php
 
 namespace wishlist\vue;
-
+/**
+ * Class ItemVue
+ * @package wishlist\vue
+ */
 class ItemVue extends Vue {
 
     protected $liste,$item;
 
+    /**
+     *
+     * constructeur
+     *
+     * @param $role
+     * @param $liste
+     * @param $item
+     */
     public function construct($role,$liste,$item){
         $this->item=$item;
         $this->liste=$liste;
         $this->role=$role;
     }
+
+
+    /**
+     *
+     * methode pour creer un item
+     *
+     * @return string
+     */
 
     public static function creeItem(){
         return <<<ez
@@ -24,6 +43,14 @@ class ItemVue extends Vue {
     ez;
     }
 
+
+    /**
+     *
+     * methode permettant d'afficher l'item
+     *
+     * @return string
+     *
+     */
     public function afficherItem(){
         $app = \Slim\Slim::getInstance();
         if($this->role==OFFREUR){
@@ -40,6 +67,13 @@ class ItemVue extends Vue {
     ez;
     }
 
+
+    /**
+     *
+     * methode permettant d'afficher les details de l'item
+     *
+     * @return string
+     */
     public function  afficherItemDetail(){
         $dispo = empty($this->item->acquereur);
         if ($dispo) {
@@ -71,6 +105,13 @@ class ItemVue extends Vue {
         ez;
     }
 
+
+    /**
+     *
+     * render
+     *
+     * @return string
+     */
     public function render(){
         $app = \Slim\Slim::getInstance();
         $url = $app->urlFor($this->role == OFFREUR ? 'consulter_liste' : 'voir_liste', array('name'=>$this->liste->token));

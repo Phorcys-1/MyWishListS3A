@@ -8,10 +8,20 @@ use wishlist\models\Liste as Lst;
 use wishlist\vue\ItemVue as VItm;
 use wishlist\vue\ListeVue as VLst;
 
-
+/**
+ * Class Offreur
+ * @package wishlist\controleur
+ */
 class Offreur
 {
 
+
+    /**
+     *
+     * Methode d'affichage de la liste
+     *
+     * @param string $name
+     */
     public function afficherListe(string $name) {
 
         $liste=Lst::where('token', '=',$name)->first();
@@ -20,6 +30,14 @@ class Offreur
         echo $aff->render();
     }
 
+
+    /**
+     *
+     * Methode pour afficher l'item
+     *
+     * @param string $name
+     * @param int $id
+     */
     public function afficherItem(string $name,int $id) {
 
         $liste=Lst::where('token','=',$name)->first;
@@ -29,6 +47,14 @@ class Offreur
 
     }
 
+
+    /**
+     *
+     * methode pour acquerir l'item
+     *
+     * @param string $name
+     * @param int $id
+     */
     public function acquerirItem(string $name,int $id) {
 
         $liste=Lst::where('token','=', $name)->first();
