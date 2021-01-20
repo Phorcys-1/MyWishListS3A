@@ -11,14 +11,20 @@ use wishlist\modele\Utilisateur as Utl;
 use wishlist\modele\Item as Itm;
 use wishlist\vue\ItemVue as vItm;
 
-
+/**
+ *
+ * Class ListeControleur
+ * @package wishlist\controleur
+ */
 
 class ListeControleur {
 
     protected $app;
     protected $user;
 
-
+    /**
+     * ListeControleur constructor.
+     */
     public function __construct() {
         $this->user=Uti::getCurrentUser();
         $this->app = \Slim\Slim::getInstance();
