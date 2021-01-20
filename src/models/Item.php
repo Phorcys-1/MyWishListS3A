@@ -5,8 +5,10 @@ namespace wishlist\models;
 use Illuminate\Database\Eloquent\Model;
 
 
-
-
+/**
+ * Class Item
+ * @package wishlist\models
+ */
 class Item extends Model{
     public  $table = 'item';
     protected $primaryKey; //= '' ?
@@ -29,10 +31,24 @@ class Item extends Model{
 
     }*/
 
+
+    /**
+     *
+     * getter
+     *
+     * @param $pId
+     */
     public static function get($pId){
         //return select * where id = $pId
     }
 
+
+    /**
+     *
+     * liste
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function liste(){
         return $this->belongsTo('wishlist\src\modele\Liste', 'liste_id');
     }

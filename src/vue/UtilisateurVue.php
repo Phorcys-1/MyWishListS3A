@@ -6,6 +6,12 @@ namespace wishlist\vue;
 
 class UtilisateurVue {
 
+
+    /**
+     *
+     * methode de formulaire
+     *
+     */
     public function registerForm(){
         echo <<<eze
         <h3>Enregistrez-vous</h3>

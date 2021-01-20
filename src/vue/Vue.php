@@ -3,14 +3,30 @@
 
 namespace wishlist\vue;
 
-
+/**
+ * Class Vue
+ * @package wishlist\vue
+ */
 abstract class Vue {
     protected $html,$menu,$role;
+
+
+    /**
+     * Vue constructor.
+     * @param int $role
+     */
 
     public function __construct(int $role){
         $this->role=$role;
     }
 
+
+    /**
+     *
+     * render
+     *
+     * @return string
+     */
     public function render(){
         if($this->role == DEMANDEUR){
             $titre="Création de liste de Voeux";
